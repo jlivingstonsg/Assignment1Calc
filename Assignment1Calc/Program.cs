@@ -6,7 +6,7 @@ namespace Assignment1Calc
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var keepAlive = true;
             while (keepAlive)
