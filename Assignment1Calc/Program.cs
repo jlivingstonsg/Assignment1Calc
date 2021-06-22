@@ -8,7 +8,7 @@ namespace Assignment1Calc
     {
         static void Main()
         {
-            var keepAlive = true;
+            bool keepAlive = true;
             while (keepAlive)
             {
                 try
