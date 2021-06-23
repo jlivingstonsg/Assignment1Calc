@@ -12,13 +12,11 @@ namespace Assignment1Calc.Tests
 
         // Tests that have to be runned with multiple datasets should be given the [Theory] attribute.
         [Theory]
-  
         [InlineData(7, 5, 2)]
         [InlineData(7, 2, 5)]
         [InlineData(-4, -6, 2)]
         public void TestSum(double expected, double firstnumber, double lastnumber)
         {
-            // Run your method to get the actual result
             double actual = calc.Sum(firstnumber, lastnumber);
             // This tests if the actual result is suppose to equal the expected result. If not, the test will fail.
             Assert.Equal(expected, actual);
