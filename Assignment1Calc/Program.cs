@@ -91,18 +91,9 @@ namespace Assignment1Calc
         private static void RunExerciseDiv(double firstnumber, double lastnumber)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-            nfi.NumberDecimalDigits = 4;
-            try
-            {
+            nfi.NumberDecimalDigits = 4;       
                 double Div = calc.Div(firstnumber, lastnumber);
-                Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Div.ToString("N", nfi));
-            }
-            catch (Exception ex)
-            {
-                // Calc.Div throws exception if lastnumber is zero. Show message of this exception to the user
-                Console.WriteLine(ex.Message);
-            }
-            //----------------------
+                Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Div.ToString("N", nfi));        
         }
     }//class Program
 

@@ -4,26 +4,22 @@ using Xunit;
 
 namespace Assignment1Calc.Tests
 {
-    /// <summary>
-    /// All methods with a [Theory] and [Fact] attribute with be runned when the unit test is running.
-    /// To run a unit test, right-click on your test project and then left-click "Run Tests" in the drop down menu.
     /// </summary>
     public class UnitTest1
     {
         // Initialize instance of Calc so it can be use inside UnitTest1
-        private static Calc calc = new Calc();
+        private static  Calc calc = new Calc();
 
         // Tests that have to be runned with multiple datasets should be given the [Theory] attribute.
         [Theory]
-        // Datasets are passed to Tests using the [InlineData(w, x, y, z)] where w, x, y, z are arguments for the
-        // Test method TestAction(int w, int x, int y, int z). Dataset must include the expected result.
+  
         [InlineData(7, 5, 2)]
         [InlineData(7, 2, 5)]
         [InlineData(-4, -6, 2)]
-        public void TestSum(int expected, int firstnumber, int lastnumber)
+        public void TestSum(double expected, double firstnumber, double lastnumber)
         {
             // Run your method to get the actual result
-            int actual = calc.Sum(firstnumber, lastnumber);
+            double actual = calc.Sum(firstnumber, lastnumber);
             // This tests if the actual result is suppose to equal the expected result. If not, the test will fail.
             Assert.Equal(expected, actual);
         }
@@ -66,5 +62,7 @@ namespace Assignment1Calc.Tests
             // This test if calc.Div(4, 0) thorws an exception
             Assert.Throws<Exception>(() => calc.Div(4, 0));
         }
-    }
-}
+
+    }//  public class UnitTest1
+
+}//  namespace Assignment1Calc.Tests

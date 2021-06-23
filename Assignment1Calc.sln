@@ -5,7 +5,10 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment1Calc", "Assignment1Calc\Assignment1Calc.csproj", "{893FB800-F51D-4E88-B0CE-428F01567283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1Calc.Tests", "Assignment1Calc.Tests\Assignment1Calc.Tests.csproj", "{CAF3CC13-7487-4D30-A349-9B21E6874C98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment1Calc.Tests", "Assignment1Calc.Tests\Assignment1Calc.Tests.csproj", "{CAF3CC13-7487-4D30-A349-9B21E6874C98}"
+	ProjectSection(ProjectDependencies) = postProject
+		{893FB800-F51D-4E88-B0CE-428F01567283} = {893FB800-F51D-4E88-B0CE-428F01567283}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
