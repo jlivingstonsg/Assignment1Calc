@@ -6,6 +6,9 @@ namespace Assignment1Calc
 {
     class Program
     {
+        // Initialize instance of Calc for nuse inside class Program
+        private static Calc calc = new Calc();
+
         static void Main()
         {
             bool keepAlive = true;
@@ -13,25 +16,29 @@ namespace Assignment1Calc
             {
                 try
                 {
-
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Calculate two numbers with 1.Addition, 2.Subtraction, 3.Multiplication, 4.Division  ");
-
+                    // Ask the user to type the first and second number.
+                    Console.Write("Enter first number: ");
+                    double firstnumber = Convert.ToDouble(Console.ReadLine());
+                    Console.Write("Enter second number: ");
+                    double lastnumber = Convert.ToDouble(Console.ReadLine());
                     Console.Write("Enter calculation assignment number (or 0 to exit): ");
                     int assignmentChoice = int.Parse(Console.ReadLine() ?? "");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                 
                     switch (assignmentChoice)
                     {
                         case 1:
-                            RunExerciseSum();
+                            RunExerciseSum( firstnumber,  lastnumber);
                             break;
                         case 2:
-                            RunExerciseSub();
+                            RunExerciseSub(firstnumber, lastnumber);
                             break;
                         case 3:
-                            RunExerciseMult();
+                            RunExerciseMult(firstnumber, lastnumber);
                             break;
                         case 4:
-                            RunExerciseDiv();
+                            RunExerciseDiv(firstnumber, lastnumber);
                             break;
                         case 0:
                             keepAlive = false;
@@ -57,97 +64,80 @@ namespace Assignment1Calc
 
         }//static void Main(string[] args)
 
-        private static void RunExerciseSum()
+        private static void RunExerciseSum(double firstnumber, double lastnumber)
         {
-
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-            /*
-            // Ask the user to type the first and second number.
-            Console.Write("Enter first number: ");
-            double firstnumber = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Enter second number: ");
-            double lastnumber = Convert.ToDouble(Console.ReadLine());
-            */
-            int[] numbers = { 40, 23 };
-            int firstnumber = numbers[0];
-            int lastnumber = numbers[1];
-
-            //----------------------
-            int sum6 = firstnumber + lastnumber;
+            double sum6 = calc.Sum(firstnumber, lastnumber);
             Console.WriteLine("Sum (+): " + firstnumber + " + " + lastnumber + " = " + sum6.ToString("N", nfi));
-            //-----------------------
         }
 
-
-        private static void RunExerciseSub()
+        private static void RunExerciseSub(double firstnumber, double lastnumber)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-            nfi.NumberDecimalDigits = 4;
-            /*
-            // Ask the user to type the first and second number.
-            Console.Write("Enter first number: ");
-            double firstnumber = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Enter second number: ");
-            double lastnumber = Convert.ToDouble(Console.ReadLine());
-            */
-            double[] numbers = { 40.0, 23.69 };
-            double firstnumber = numbers[0];
-            double lastnumber = numbers[1];
-            //----------------------
-            double sub = firstnumber - lastnumber;
+            nfi.NumberDecimalDigits = 4;          
+            double sub = calc.Sub(firstnumber, lastnumber);
             Console.WriteLine("Sum (+): " + firstnumber + " - " + lastnumber + " = " + sub.ToString("N", nfi));
         }
 
-        private static void RunExerciseMult()
+        private static void RunExerciseMult(double firstnumber, double lastnumber)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-            /*
-            // Ask the user to type the first and second number.
-            Console.Write("Enter first number: ");
-            double firstnumber = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Enter second number: ");
-            double lastnumber = Convert.ToDouble(Console.ReadLine());
-            */
-            double[] numbers = { 40.0, 23.69 };
-            double firstnumber = numbers[0];
-            double lastnumber = numbers[1];
-            //----------------------
-            double Mult = firstnumber * lastnumber;
+            double Mult = calc.Mult(firstnumber, lastnumber);
             Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Mult.ToString("N", nfi));
         }
 
-        private static void RunExerciseDiv()
+        private static void RunExerciseDiv(double firstnumber, double lastnumber)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-            /*
-            // Ask the user to type the first and second number.
-            Console.Write("Enter first number: ");
-            double firstnumber = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Enter second number(not 0): ");
-            double lastnumber = Convert.ToDouble(Console.ReadLine());
-            */
-            double[] numbers = { 40.0, 23.69 };
-            double firstnumber = numbers[0];
-            double lastnumber = numbers[1];
+            try
+            {
+                double Div = calc.Div(firstnumber, lastnumber);
+                Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Div.ToString("N", nfi));
+            }
+            catch (Exception ex)
+            {
+                // Calc.Div throws exception if lastnumber is zero. Show message of this exception to the user
+                Console.WriteLine(ex.Message);
+            }
             //----------------------
+        }
+    }//class Program
+
+   
+    public class Calc
+    {
+        public double Sum(double firstnumber, double lastnumber)
+        {
+            double sum = firstnumber + lastnumber;
+            return sum;
+        }
+
+        public double Sub(double firstnumber, double lastnumber)
+        {
+            double sub = firstnumber - lastnumber;
+            return sub;
+        }
+
+        public double Mult(double firstnumber, double lastnumber)
+        {
+            double mult = firstnumber * lastnumber;
+            return mult;
+        }
+
+        public double Div(double firstnumber, double lastnumber)
+        {
             if (lastnumber == 0)
             {
-                Console.WriteLine("You can not divide with 0. ");
+                throw new Exception("You can not divide with 0. ");
             }
             else
             {
-                double Div = firstnumber / lastnumber;
-                Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Div.ToString("N", nfi));
-
+                double div = firstnumber / lastnumber;
+                return div;
             }
-
-
         }
-
-
-    }//class Program
-
+    }//class Calc
 }//namespace Assignment1Calc
