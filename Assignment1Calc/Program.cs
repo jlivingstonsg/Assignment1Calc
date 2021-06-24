@@ -20,9 +20,9 @@ namespace Assignment1Calc
                     Console.WriteLine("Calculate two numbers with 1.Addition, 2.Subtraction, 3.Multiplication, 4.Division  ");
                     // Ask the user to type the first and second number.
                     Console.Write("Enter first number: ");
-                    double firstnumber = Convert.ToDouble(Console.ReadLine());
+                    int firstnumber = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Enter second number: ");
-                    double lastnumber = Convert.ToDouble(Console.ReadLine());
+                    int lastnumber = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Enter calculation assignment number (or 0 to exit): ");
                     int assignmentChoice = int.Parse(Console.ReadLine() ?? "");
                  
@@ -64,11 +64,11 @@ namespace Assignment1Calc
 
         }//static void Main(string[] args)
 
-        private static void RunExerciseSum(double firstnumber, double lastnumber)
+        private static void RunExerciseSum(int firstnumber, int lastnumber)
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-            double sum6 = calc.Sum(firstnumber, lastnumber);
+            int sum6 = calc.SumSub(firstnumber, lastnumber);
             Console.WriteLine("Sum (+): " + firstnumber + " + " + lastnumber + " = " + sum6.ToString("N", nfi));
         }
 
@@ -76,7 +76,7 @@ namespace Assignment1Calc
         {
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;          
-            double sub = calc.Sub(firstnumber, lastnumber);
+            double sub = calc.SumSub(firstnumber, lastnumber);
             Console.WriteLine("Sum (+): " + firstnumber + " - " + lastnumber + " = " + sub.ToString("N", nfi));
         }
 
@@ -100,13 +100,13 @@ namespace Assignment1Calc
    
     public class Calc
     {
-        public double Sum(double firstnumber, double lastnumber)
+        public int SumSub(int firstnumber, int lastnumber)
         {
-            double sum = firstnumber + lastnumber;
+            int sum = firstnumber + lastnumber;
             return sum;
         }
 
-        public double Sub(double firstnumber, double lastnumber)
+        public double SumSub(double firstnumber, double lastnumber)
         {
             double sub = firstnumber - lastnumber;
             return sub;

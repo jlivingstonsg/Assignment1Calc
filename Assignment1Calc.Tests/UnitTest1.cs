@@ -15,9 +15,9 @@ namespace Assignment1Calc.Tests
         [InlineData(7, 5, 2)]
         [InlineData(7, 2, 5)]
         [InlineData(-4, -6, 2)]
-        public void TestSum(double expected, double firstnumber, double lastnumber)
+        public void TestSum(int expected, int firstnumber, int lastnumber)
         {
-            double actual = calc.Sum(firstnumber, lastnumber);
+            int actual = calc.SumSub(firstnumber, lastnumber);
             // This tests if the actual result is suppose to equal the expected result. If not, the test will fail.
             Assert.Equal(expected, actual);
         }
@@ -29,7 +29,7 @@ namespace Assignment1Calc.Tests
         [InlineData(14.5, 9.2, -5.3)]
         public void TestSub(double expected, double firstnumber, double lastnumber)
         {
-            double actual = calc.Sub(firstnumber, lastnumber);
+            double actual = calc.SumSub(firstnumber, lastnumber);
             Assert.Equal(expected, actual);
         }
 
