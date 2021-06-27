@@ -7,7 +7,7 @@ namespace Assignment1Calc
     class Program
     {
         // Initialize instance of Calc for nuse inside class Program
-        private static Calc calc = new Calc();
+        private static readonly Calc calc = new Calc();
 
         static void Main()
         {
@@ -17,46 +17,43 @@ namespace Assignment1Calc
                 try
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Calculate two numbers with 1.Addition, 2.Subtraction, 3.Multiplication, 4.Division  ");
+                    Console.WriteLine(" Calculate numbers with 1.Addition, 2.Subtraction, 3.Multiplication, 4.Division  ");
                     // Ask the user to type the first and second number.
-                    Console.Write("Enter first number: ");
-                    int firstnumber = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Enter second number: ");
-                    int lastnumber = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Enter calculation assignment number (or 0 to exit): ");
+                   
+                    Console.Write(" Enter calculation assignment number (or 0 to exit): ");
                     int assignmentChoice = int.Parse(Console.ReadLine() ?? "");
                  
                     switch (assignmentChoice)
                     {
                         case 1:
-                            RunExerciseSum( firstnumber,  lastnumber);
+                            RunExerciseSum();
                             break;
                         case 2:
-                            RunExerciseSub(firstnumber, lastnumber);
+                            RunExerciseSub();
                             break;
                         case 3:
-                            RunExerciseMult(firstnumber, lastnumber);
+                            RunExerciseMult();
                             break;
                         case 4:
-                            RunExerciseDiv(firstnumber, lastnumber);
+                            RunExerciseDiv();
                             break;
                         case 0:
                             keepAlive = false;
                             break;
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("1. That is not a valid input!");
+                            Console.WriteLine(" 1. That is not a valid input!");
                             break;
                     }
                     Console.ResetColor();
-                    Console.WriteLine("Hit any key to continue!");
+                    Console.WriteLine(" Hit any key to continue!");
                     Console.ReadKey();
                     Console.Clear();
                 }
                 catch
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("2. That is not a valid input!");
+                    Console.WriteLine(" 2. That is not a valid input!");
                     Console.ResetColor();
                 }
 
@@ -64,36 +61,64 @@ namespace Assignment1Calc
 
         }//static void Main(string[] args)
 
-        private static void RunExerciseSum(int firstnumber, int lastnumber)
+        private static void RunExerciseSum()
         {
+            Console.Write(" Write numbers (comma-separeted) who will be added. \n Your numbers: ");
+            string arraysumstringinput = (Console.ReadLine());
+            int[] arraysuminput = Array.ConvertAll(arraysumstringinput.Split(','), int.Parse);
+
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-            int sum6 = calc.SumSub(firstnumber, lastnumber);
-            Console.WriteLine("Sum (+): " + firstnumber + " + " + lastnumber + " = " + sum6.ToString("N", nfi));
+
+            var totsum = 0;
+            for (var i = 0; i < arraysuminput.Length; i++)
+            {
+                totsum = calc.SumSub(arraysuminput[i], totsum);
+            }
+            Console.WriteLine(" Sum: " + totsum.ToString("N", nfi));
         }
 
-        private static void RunExerciseSub(double firstnumber, double lastnumber)
+        private static void RunExerciseSub()
         {
+            Console.Write(" Write numbers (comma-separeted) who will be subtracted. \n Your numbers: ");
+            string arraysubstringinput = (Console.ReadLine());
+            double[] arraysubinput = Array.ConvertAll(arraysubstringinput.Split(','), double.Parse);
+
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-            nfi.NumberDecimalDigits = 4;          
-            double sub = calc.SumSub(firstnumber, lastnumber);
-            Console.WriteLine("Sum (+): " + firstnumber + " - " + lastnumber + " = " + sub.ToString("N", nfi));
+            nfi.NumberDecimalDigits = 4;
+
+            double totsub = 0;
+            for (var i = 0; i < arraysubinput.Length; i++)
+            {
+                totsub = calc.SumSub(totsub, arraysubinput[i]);
+            }
+            Console.WriteLine(" Subtract : " + totsub.ToString("N", nfi));
         }
 
-        private static void RunExerciseMult(double firstnumber, double lastnumber)
+        private static void RunExerciseMult()
         {
+            Console.Write(" Enter first number: ");
+            int firstnumber = Convert.ToInt32(Console.ReadLine());
+            Console.Write(" Enter second number: ");
+            int lastnumber = Convert.ToInt32(Console.ReadLine());
+
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
             double Mult = calc.Mult(firstnumber, lastnumber);
-            Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Mult.ToString("N", nfi));
+            Console.WriteLine(" Multiplication (*): " + firstnumber + " * " + lastnumber + " = " + Mult.ToString("N", nfi));
         }
 
-        private static void RunExerciseDiv(double firstnumber, double lastnumber)
+        private static void RunExerciseDiv()
         {
+            Console.Write(" Enter first number: ");
+            int firstnumber = Convert.ToInt32(Console.ReadLine());
+            Console.Write(" Enter second number: ");
+            int lastnumber = Convert.ToInt32(Console.ReadLine());
+
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;       
                 double Div = calc.Div(firstnumber, lastnumber);
-                Console.WriteLine("Sum (+): " + firstnumber + " * " + lastnumber + " = " + Div.ToString("N", nfi));        
+                Console.WriteLine(" Division (/): " + firstnumber + " / " + lastnumber + " = " + Div.ToString("N", nfi));        
         }
     }//class Program
 

@@ -8,7 +8,7 @@ namespace Assignment1Calc.Tests
     public class UnitTest1
     {
         // Initialize instance of Calc so it can be use inside UnitTest1
-        private static  Calc calc = new Calc();
+        private static readonly Calc calc = new Calc();
 
         // Tests that have to be runned with multiple datasets should be given the [Theory] attribute.
         [Theory]
