@@ -17,9 +17,14 @@ namespace Assignment1Calc
                 try
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(" Calculate numbers with 1.Addition, 2.Subtraction, 3.Multiplication, 4.Division  ");
+                    Console.WriteLine(" Calculate numbers \n " +
+                        "Addition:       1. Two numbers, 2. Many numbers \n " +
+                        "Subtraction:    3. Two numbers, 4. Many numbers \n " +
+                        "Multiplication: 5. Two numbers \n " +
+                        "Division:       6. Two numbers  ");
                     // Ask the user to type the first and second number.
-                   
+                    Console.WriteLine("--------------------------------------------------- ");
+
                     Console.Write(" Enter calculation assignment number (or 0 to exit): ");
                     int assignmentChoice = int.Parse(Console.ReadLine() ?? "");
                  
@@ -29,17 +34,23 @@ namespace Assignment1Calc
                             RunExerciseSum();
                             break;
                         case 2:
-                            RunExerciseSub();
+                            RunExerciseSumArray();
                             break;
                         case 3:
-                            RunExerciseMult();
+                            RunExerciseSub();
                             break;
                         case 4:
-                            RunExerciseDiv();
+                            RunExerciseSubArray();
                             break;
+                        case 5:
+                            RunExerciseMult();
+                            break;
+                        case 6:
+                            RunExerciseDiv();
+                            break;                                                                        
                         case 0:
                             keepAlive = false;
-                            break;
+                            break;                                                                       
                         default:
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(" 1. That is not a valid input!");
@@ -61,27 +72,66 @@ namespace Assignment1Calc
 
         }//static void Main(string[] args)
 
+
         private static void RunExerciseSum()
+        {
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberDecimalDigits = 4;
+            // Ask the user to type the first and second number.
+            Console.Write(" Enter first number: ");
+            double firstnumber = Convert.ToDouble(Console.ReadLine());
+            Console.Write(" Enter second number: ");
+            double lastnumber = Convert.ToDouble(Console.ReadLine());
+            //----------------------
+            double totsum = calc.SumInput(firstnumber, lastnumber);
+            Console.WriteLine(" Sum (+): " + firstnumber + " + " + lastnumber + " = " + totsum.ToString("N", nfi));
+            //-----------------------
+        }
+
+
+        private static void RunExerciseSumArray()
         {
             Console.Write(" Write numbers (comma-separeted) who will be added. \n Your numbers: ");
             string arraysumstringinput = (Console.ReadLine());
-            int[] arraysuminput = Array.ConvertAll(arraysumstringinput.Split(','), int.Parse);
+            double[] arraysuminput = Array.ConvertAll(arraysumstringinput.Split(','), double.Parse);
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-            int totsum = calc.SumSub(arraysuminput);           
+            double totsum = calc.SumInput(arraysuminput);
             Console.WriteLine(" Sum: " + totsum.ToString("N", nfi));
         }
 
+
+
         private static void RunExerciseSub()
+        {
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberDecimalDigits = 4;
+            // Ask the user to type the first and second number.
+            Console.Write(" Enter first number: ");
+            double firstnumber = Convert.ToDouble(Console.ReadLine());
+            Console.Write(" Enter second number: ");
+            double lastnumber = Convert.ToDouble(Console.ReadLine());
+            //----------------------            
+            double totsum = calc.SubInput(firstnumber, lastnumber);
+            Console.WriteLine(" Subtract (-): " + firstnumber + " - " + lastnumber + " = " + totsum.ToString("N", nfi));
+            //-----------------------
+        }
+
+
+        private static void RunExerciseSubArray()
         {
             Console.Write(" Write numbers (comma-separeted) who will be subtracted. \n Your numbers: ");
             string arraysubstringinput = (Console.ReadLine());
             double[] arraysubinput = Array.ConvertAll(arraysubstringinput.Split(','), double.Parse);
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-            nfi.NumberDecimalDigits = 4;            
-            double totsub = calc.SumSub(arraysubinput);           
-            Console.WriteLine(" Subtract : " + totsub.ToString("N", nfi));
+            nfi.NumberDecimalDigits = 4;
+            double totsub = calc.SubInput(arraysubinput);
+            Console.WriteLine(" Subtracted (-): " + totsub.ToString("N", nfi));
         }
+
+
+
 
         private static void RunExerciseMult()
         {
@@ -113,10 +163,16 @@ namespace Assignment1Calc
    
     public class Calc
     {
-        public int SumSub(int[] arraysuminput)
+        public double SumInput(double suminput1, double suminput2)
+        {
+            double totsum = suminput1 + suminput2;            
+            return totsum;
+        }
+
+        public double SumInput(double[] arraysuminput)
         {
 
-            int totsum = 0;
+            double totsum = 0;
             for (int i = 0; i < arraysuminput.Length; i++)
             {
                 totsum = arraysuminput[i] + totsum;
@@ -124,7 +180,13 @@ namespace Assignment1Calc
             return totsum;
         }
 
-        public double SumSub(double[] arraysubinput)
+        public double SubInput(double subinput1, double subinput2)
+        {
+            double totsub = subinput1 - subinput2;
+            return totsub;
+        }
+
+        public double SubInput(double[] arraysubinput)
         {
 
             double totsub = arraysubinput[0];
