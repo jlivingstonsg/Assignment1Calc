@@ -66,15 +66,9 @@ namespace Assignment1Calc
             Console.Write(" Write numbers (comma-separeted) who will be added. \n Your numbers: ");
             string arraysumstringinput = (Console.ReadLine());
             int[] arraysuminput = Array.ConvertAll(arraysumstringinput.Split(','), int.Parse);
-
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
             nfi.NumberDecimalDigits = 4;
-
-            var totsum = 0;
-            for (var i = 0; i < arraysuminput.Length; i++)
-            {
-                totsum = calc.SumSub(arraysuminput[i], totsum);
-            }
+            int totsum = calc.SumSub(arraysuminput);           
             Console.WriteLine(" Sum: " + totsum.ToString("N", nfi));
         }
 
@@ -83,15 +77,9 @@ namespace Assignment1Calc
             Console.Write(" Write numbers (comma-separeted) who will be subtracted. \n Your numbers: ");
             string arraysubstringinput = (Console.ReadLine());
             double[] arraysubinput = Array.ConvertAll(arraysubstringinput.Split(','), double.Parse);
-
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-            nfi.NumberDecimalDigits = 4;
-
-            double totsub = 0;
-            for (var i = 0; i < arraysubinput.Length; i++)
-            {
-                totsub = calc.SumSub(totsub, arraysubinput[i]);
-            }
+            nfi.NumberDecimalDigits = 4;            
+            double totsub = calc.SumSub(arraysubinput);           
             Console.WriteLine(" Subtract : " + totsub.ToString("N", nfi));
         }
 
@@ -125,16 +113,26 @@ namespace Assignment1Calc
    
     public class Calc
     {
-        public int SumSub(int firstnumber, int lastnumber)
+        public int SumSub(int[] arraysuminput)
         {
-            int sum = firstnumber + lastnumber;
-            return sum;
+
+            int totsum = 0;
+            for (int i = 0; i < arraysuminput.Length; i++)
+            {
+                totsum = arraysuminput[i] + totsum;
+            }
+            return totsum;
         }
 
-        public double SumSub(double firstnumber, double lastnumber)
+        public double SumSub(double[] arraysubinput)
         {
-            double sub = firstnumber - lastnumber;
-            return sub;
+
+            double totsub = arraysubinput[0];
+            for (int i = 1; i < arraysubinput.Length; i++)
+            {
+                totsub = totsub - arraysubinput[i];
+            }
+            return totsub;
         }
 
         public double Mult(double firstnumber, double lastnumber)
